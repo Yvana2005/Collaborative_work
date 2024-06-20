@@ -19,6 +19,9 @@ from django.urls import path, include
 from .views import DashboardView
 from meeting.views import current_meeting
 from chatt import views
+from fileshare.views import file, downloadFile
+from django.conf import settings
+
 
 urlpatterns = [
     path("", DashboardView.as_view(), name="dashboard"),
@@ -26,5 +29,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("", include("calendarapp.urls")),
     path('chatt/', include("chatt.urls")),
-    path('meeting', current_meeting, name="meeting")
+    path('meeting', current_meeting, name="meeting"),
+    path('file', file, name="file"),
+    path('<str:id>/', downloadFile, name="downloadFile")
 ]
